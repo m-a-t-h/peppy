@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 class Fibonacci:
-    def _generate_fib(self,):
+    def __generate_fib(self,):
         fib = [1,2]
         next = 3
         while True:
@@ -27,7 +27,7 @@ class Fibonacci:
             print "this method needs number >= 2"
             return []
         ret = [1, 2]
-        fib = self._generate_fib()
+        fib = self.__generate_fib()
         next = fib.next()
         while next <= upper_limit:
             ret.append(next)

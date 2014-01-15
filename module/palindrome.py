@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 class Palindrome:
-    def _is_palindrome(self, integer):
+    def __is_palindrome(self, integer):
         return str(integer) == str(integer)[::-1]
 
     # 与えられた桁数の 2 つの数の積のうち、最大の回文数を求める
@@ -28,7 +28,7 @@ class Palindrome:
                 break
             for second in range(high, low-1, -1):
                 tmp_max = first * second
-                if self._is_palindrome(tmp_max) and max < tmp_max:
+                if self.__is_palindrome(tmp_max) and max < tmp_max:
                     max = tmp_max
                     break
         return max

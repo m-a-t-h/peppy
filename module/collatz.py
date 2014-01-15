@@ -45,7 +45,7 @@ class Collatz:
 
             # check already stored
             if n in self._collatz_lengths_stored:
-                break # 最後が1で終わっていなくてもここで終了
+                break # 最後が 1 で終わっていなくてもここで終了
 
             n = self.__get_next_collatz(n)
             # 末尾に要素を追加
@@ -119,7 +119,7 @@ class Collatz:
                 sys.exit(1)
 
             # 全体の長さは「collatz_sequence = [13, 40, 20, 10, 5, 16, 8] の長さ」と「8 から 1 までの長さ (保存済み)」の和
-            # から1を引いたもの (8 を二回数えているので)
+            # から 1 を引いたもの (8 を二回数えているので)
             this_collatz_length = len(collatz_sequence) + self._collatz_lengths_stored[end_num] -1
             start_num = collatz_sequence[0]
 

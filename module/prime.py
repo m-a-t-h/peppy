@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 class Prime:
-    def _generate_prime(self,):
+    def __generate_prime(self,):
         primes = [2]
         p_candidate = 1
         while True:
@@ -39,7 +39,7 @@ class Prime:
             print "this method needs number >= 1"
             return []
         ret = []
-        prime = self._generate_prime()
+        prime = self.__generate_prime()
         for i in range(n):
             next = prime.next()
             ret.append(next)
@@ -63,7 +63,7 @@ class Prime:
             print "this method needs number >= 2"
             return []
         ret = []
-        prime = self._generate_prime()
+        prime = self.__generate_prime()
         next = prime.next()
         while next <= upper_limit:
             ret.append(next)

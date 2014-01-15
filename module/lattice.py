@@ -11,11 +11,11 @@ class Lattice:
     * input 無し
 
     n行 m列の格子の、左上から右下へ至る経路の個数を数える関数
-    2*3 の場合、
+    2 * 3 の場合、
     lattice = [
-        [1,1,1,1], // 0行目
-        [1,2,3,4], // 1行目
-        [1,3,6,10] // 2行目
+        [1, 1, 1, 1], // 0 行目
+        [1, 2, 3, 4], // 1 行目
+        [1, 3, 6, 10] // 2 行目
     ]
     の右下 (10) を返す
     """
@@ -35,9 +35,9 @@ class Lattice:
 
     2*3 の場合、
     lattice = [
-        [1,1,1,1], // 0行目
-        [1,], // 1行目
-        [1,] // 2行目
+        [1, 1, 1, 1], // 0 行目
+        [1,],         // 1 行目
+        [1,]          // 2 行目
     ]
     """
     def initialize_lattice(self,):
@@ -46,12 +46,12 @@ class Lattice:
         >>> L.initialize_lattice()
         [[1, 1, 1, 1], [1], [1]]
         """
-        # 0行目を 1 で初期化
+        # 0 行目を 1 で初期化
         self._lattice_paths = []
-        zeroth_row = [1,] * (self._m + 1) # [1,1,...]
+        zeroth_row = [1,] * (self._m + 1) # [1, 1 ,...]
         self._lattice_paths.append( zeroth_row )
-        # 各行の0列目を 1 で初期化
-        for i in range(1, self._n + 1): # i行目
+        # 各行の 0 列目を 1 で初期化
+        for i in range(1, self._n + 1): # i 行目
             ith_row = [1,]
             self._lattice_paths.append(ith_row)
         return self._lattice_paths
@@ -69,8 +69,8 @@ class Lattice:
         >>> L2.increment_lattice()
         [[2, 2, 2], [2, 4, 6], [2, 6, 12]]
         """
-        for j in range(1, self._m + 1): # j列目の
-            for i in range(1, self._n + 1): # i行目
+        for j in range(1, self._m + 1): # j 列目
+            for i in range(1, self._n + 1): # i 行目
                 #print grid
                 try:
                     # lattice[i][j] を追加
