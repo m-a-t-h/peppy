@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 """
-Problem 15 "Lattice Paths" の解法
-http://odz.sakura.ne.jp/projecteuler/index.php?cmd=read&page=Problem%2015
+Lattice Paths
+ref: http://odz.sakura.ne.jp/projecteuler/index.php?cmd=read&page=Problem%2015
 """
 
 import sys,os
@@ -17,3 +17,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+# 137846528820

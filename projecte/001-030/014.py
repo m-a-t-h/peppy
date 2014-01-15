@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 """
-Problem 14 "Longest Collatz sequence" の解法
-http://odz.sakura.ne.jp/projecteuler/index.php?cmd=read&page=Problem%2014
+Longest Collatz sequence
+ref: http://odz.sakura.ne.jp/projecteuler/index.php?cmd=read&page=Problem%2014
 """
 
 import sys,os
@@ -25,3 +25,4 @@ def main():
 if __name__ == '__main__':
     main()
 
+# 837799
