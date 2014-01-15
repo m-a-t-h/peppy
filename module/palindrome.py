@@ -20,21 +20,18 @@ class Palindrome:
         if keta < 1:
             print "this method needs number >= 1"
             return 0
-        ret = 0
+        max = 0
         low  = pow(10, keta - 1)
         high = pow(10, keta) - 1
-        first  = high
-        while low < first:
-            second = high
-            if first * second < ret:
+        for first in range(high, low-1, -1): # [high, high-1, high-2, ... low]
+            if first * high < max:
                 break
-            while low < second:
-                tmp_num = first * second
-                if self._is_palindrome(tmp_num) and ret < tmp_num:
-                    ret = tmp_num
-                second -= 1
-            first -= 1
-        return ret
+            for second in range(high, low-1, -1):
+                tmp_max = first * second
+                if self._is_palindrome(tmp_max) and max < tmp_max:
+                    max = tmp_max
+                    break
+        return max
 
 if __name__ == "__main__":
     import doctest
