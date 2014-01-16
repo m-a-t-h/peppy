@@ -31,7 +31,7 @@ class Collatz:
 
         >>> C.get_collatz_sequence(-13)
         Traceback (most recent call last):
-        ValueError: input has to be a positive int
+        ValueError: input has to be a positive int or long: -13
         """
         if isinstance(start_num, (int, long)) == False or start_num <= 0:
             raise ValueError("input has to be a positive int or long: %s" %start_num)
@@ -104,7 +104,7 @@ class Collatz:
 
         >>> C.store_collatz_lengths(0)
         Traceback (most recent call last):
-        ValueError: input has to be a list of length 1 or longer
+        ValueError: input has to be a list of length 1 or longer: 0
         """
         if isinstance(collatz_sequence, list) == False or len(collatz_sequence) == 0:
             raise ValueError("input has to be a list of length 1 or longer: %s" %collatz_sequence)
@@ -138,5 +138,7 @@ class Collatz:
 
 if __name__ == "__main__":
     import doctest
-    doctest.testmod()
+    if doctest.testmod().failed:
+        import sys
+        sys.exit(1)
 
