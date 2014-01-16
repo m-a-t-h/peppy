@@ -2,10 +2,16 @@
 
 class Prime:
     def __generate_prime(self,):
+        """
+        >>> P = Prime()
+        >>> P.__generate_prime()
+        Traceback (most recent call last):
+        AttributeError: Prime instance has no attribute '__generate_prime'
+        """
         primes = [2]
         p_candidate = 1
         while True:
-            p_candidate = p_candidate + 2
+            p_candidate += 2
             is_prime = True
             # p_candidate を素数で割っていく
             for p in primes:
@@ -19,25 +25,23 @@ class Prime:
                 primes.append(p_candidate)
 
     """
-    素数をn個小さい順に取得する
+    素数を n 個小さい順に取得する
     """
     def get_n_primes(self, n):
         """
-        normal pattern
         >>> P = Prime()
         >>> P.get_n_primes(1)
         [2]
+
         >>> P.get_n_primes(25)
         [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
 
-        abnormal pattern
         >>> P.get_n_primes(-1)
-        this method needs number >= 1
-        []
+        Traceback (most recent call last):
+        ValueError: input has to be a positive int or long: -1
         """
-        if int(n) < 1:
-            print "this method needs number >= 1"
-            return []
+        if isinstance(n, (int, long)) == False or n <= 0:
+            raise ValueError("input has to be a positive int or long: %s" %n)
         ret = []
         prime = self.__generate_prime()
         for i in range(n):
@@ -47,21 +51,20 @@ class Prime:
 
     def get_primes_by_upper_limit(self, upper_limit):
         """
-        normal pattern
         >>> P = Prime()
         >>> P.get_primes_by_upper_limit(2)
         [2]
+
         >>> P.get_primes_by_upper_limit(100)
         [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
 
-        abnormal pattern
         >>> P.get_primes_by_upper_limit(-1)
-        this method needs number >= 2
-        []
+        Traceback (most recent call last):
+        ValueError: input has to be a number (>= 2): -1
         """
-        if int(upper_limit) < 2:
-            print "this method needs number >= 2"
-            return []
+        import numbers
+        if isinstance(upper_limit, numbers.Number) == False or upper_limit < 2:
+            raise ValueError("input has to be a number (>= 2): %s" %upper_limit)
         ret = []
         prime = self.__generate_prime()
         next = prime.next()
@@ -75,21 +78,19 @@ class Prime:
     # n = (a ** p) * (b ** q) のとき、get_prime_factors(n) = {a: p, b: q}
     def get_prime_factors(self, n):
         """
-        normal pattern
         >>> P = Prime()
         >>> P.get_prime_factors(2)
         {2: 1}
+
         >>> P.get_prime_factors(100)
         {2: 2, 5: 2}
 
-        abnormal pattern
         >>> P.get_prime_factors(-1)
-        this method needs number >= 2
-        {}
+        Traceback (most recent call last):
+        ValueError: input has to be a positive int or long (>= 2): -1
         """
-        if int(n) < 2:
-            print "this method needs number >= 2"
-            return {}
+        if isinstance(n, (int, long)) == False or n <= 1:
+            raise ValueError("input has to be a positive int or long (>= 2): %s" %n)
         ret = {}
         import math
         # use math.sqrt for speedup
@@ -122,22 +123,20 @@ class Prime:
     # 与えられた数の約数の個数を求める
     def get_count_of_divisors(self, n):
         """
-        normal pattern
         >>> P = Prime()
         >>> P.get_count_of_divisors(2)
         2
+
         >>> P.get_count_of_divisors(100)
         9
 
-        abnormal pattern
         >>> P.get_count_of_divisors(-1)
-        this method needs number >= 1
-        0
+        Traceback (most recent call last):
+        ValueError: input has to be a positive int or long: -1
         """
-        if int(n) < 1:
-            print "this method needs number >= 1"
-            return 0
-        if int(n) == 1:
+        if isinstance(n, (int, long)) == False or n <= 0:
+            raise ValueError("input has to be a positive int or long: %s" %n)
+        if n == 1:
             return 1
         # n = (a ** p) * (b ** q) * (c ** r) のとき、
         # n の約数は (p + 1) * (q + 1) * (r + 1) で求められる
