@@ -32,11 +32,6 @@ class Collatz:
         >>> C.get_collatz_sequence(-13)
         Traceback (most recent call last):
         ValueError: input has to be a positive int or long: -13
-
-        # fail test
-        >>> C.get_collatz_sequence(-13)
-        Traceback (most recent call last):
-        ValueError: fuck
         """
         if isinstance(start_num, (int, long)) == False or start_num <= 0:
             raise ValueError("input has to be a positive int or long: %s" %start_num)
