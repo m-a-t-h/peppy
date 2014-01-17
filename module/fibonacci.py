@@ -2,6 +2,12 @@
 
 class Fibonacci:
     def __generate_fib(self,):
+        """
+        >>> F = Fibonacci()
+        >>> F.__generate_fib()
+        Traceback (most recent call last):
+        AttributeError: Fibonacci instance has no attribute '__generate_fib'
+        """
         fib = [1,2]
         next = 3
         while True:
@@ -11,21 +17,20 @@ class Fibonacci:
 
     def get_fibs_by_upper_limit(self, upper_limit):
         """
-        normal pattern
         >>> F = Fibonacci()
         >>> F.get_fibs_by_upper_limit(2)
         [1, 2]
+
         >>> F.get_fibs_by_upper_limit(100)
         [1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
 
-        abnormal pattern
         >>> F.get_fibs_by_upper_limit(-1)
-        this method needs number >= 2
-        []
+        Traceback (most recent call last):
+        ValueError: input has to be a number (>= 2): -1
         """
-        if int(upper_limit) < 2:
-            print "this method needs number >= 2"
-            return []
+        import numbers
+        if isinstance(upper_limit, numbers.Number) == False or upper_limit < 2:
+            raise ValueError("input has to be a number (>= 2): %s" %upper_limit)
         ret = [1, 2]
         fib = self.__generate_fib()
         next = fib.next()
