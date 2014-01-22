@@ -120,30 +120,6 @@ class Prime:
             ret[n] = 1
         return ret
 
-    # 与えられた数の約数の個数を求める
-    def get_count_of_divisors(self, n):
-        """
-        >>> P = Prime()
-        >>> P.get_count_of_divisors(2)
-        2
-
-        >>> P.get_count_of_divisors(100)
-        9
-
-        >>> P.get_count_of_divisors(-1)
-        Traceback (most recent call last):
-        ValueError: input has to be a positive int or long: -1
-        """
-        if isinstance(n, (int, long)) == False or n <= 0:
-            raise ValueError("input has to be a positive int or long: %s" %n)
-        if n == 1:
-            return 1
-        # n = (a ** p) * (b ** q) * (c ** r) のとき、
-        # n の約数は (p + 1) * (q + 1) * (r + 1) で求められる
-        factors = self.get_prime_factors(n)
-        powers = [v + 1 for v in factors.values()] # [p+1, q+1, r+1, ...]
-        return reduce(lambda x, y: x * y, powers)
-
 if __name__ == "__main__":
     import doctest
     if doctest.testmod().failed:
