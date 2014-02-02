@@ -4,6 +4,7 @@ import sys,os
 sys.path.append( os.path.abspath(os.path.dirname(__file__)) )
 from prime import Prime
 from permutation import Permutation
+from util.performance import Performance
 
 class Divisor:
     def __init__(self,):
@@ -44,11 +45,11 @@ class Divisor:
         [1, 2, 4, 5, 8, 10, 20, 25, 40, 50, 100]
         """
         if n >= n_large:
-            return self.__get_pds1(n)
+            return self._get_pds1(n)
         else:
-            return self.__get_pds2(n)
+            return self._get_pds2(n)
 
-    def __get_pds1(self, n):
+    def _get_pds1(self, n):
         prime_factors = self.__mod_prime.get_prime_factors(n)
 
         # prime_all_powers
@@ -64,12 +65,35 @@ class Divisor:
             res.append( reduce(lambda x,y: int(x)*int(y), pair) )
         return res
 
-    def __get_pds2(self, n):
+    def _get_pds2(self, n):
         pds = []
         for i in range(1, int(n / 2) + 1):
             if n % i == 0:
                 pds.append( i )
         return pds
+
+    def test_pds_performance(self, n):
+        """
+        >>> D = Divisor()
+        >>> D.test_pds_performance(100)
+        False
+        >>> D.test_pds_performance(300)
+        False
+        >>> D.test_pds_performance(1000)
+        False
+        >>> D.test_pds_performance(2000)
+        False
+        >>> D.test_pds_performance(2500)
+        True
+        >>> D.test_pds_performance(3000)
+        True
+        >>> D.test_pds_performance(10000)
+        True
+        """
+        P = Performance()
+        return P.compare_functions(self, '_get_pds1', [n,],
+                                   self, '_get_pds2', [n,])
+
 
 if __name__ == "__main__":
     import doctest

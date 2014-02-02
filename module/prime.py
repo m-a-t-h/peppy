@@ -90,7 +90,7 @@ class Prime:
         ValueError: input has to be a positive int or long (>= 2): -1
         """
         if isinstance(n, (int, long)) == False or n <= 1:
-            raise ValueError("input has to be a positive int or long (>= 2): %s" %n)
+            raise ValueError("input has to be a positive int or long (>= 2): %s" %str(n))
         ret = {}
         import math
         # use math.sqrt for speedup
