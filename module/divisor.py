@@ -4,6 +4,7 @@ import sys,os
 sys.path.append( os.path.abspath(os.path.dirname(__file__)) )
 from prime import Prime
 from permutation import Permutation
+from util.performance import Performance
 
 class Divisor:
     def __init__(self,):
@@ -33,8 +34,7 @@ class Divisor:
         powers = [v + 1 for v in factors.values()] # [p+1, q+1, r+1, ...]
         return reduce(lambda x, y: x * y, powers)
 
-    # TODO: optimize performance by changing n_large
-    def get_proper_divisors(self, n, n_large = 10000):
+    def get_proper_divisors(self, n, n_large = 2000):
         """
         >>> D = Divisor()
         >>> D.get_proper_divisors(28)
@@ -44,11 +44,11 @@ class Divisor:
         [1, 2, 4, 5, 8, 10, 20, 25, 40, 50, 100]
         """
         if n >= n_large:
-            return self.__get_pds1(n)
+            return self._get_pds1(n)
         else:
-            return self.__get_pds2(n)
+            return self._get_pds2(n)
 
-    def __get_pds1(self, n):
+    def _get_pds1(self, n):
         prime_factors = self.__mod_prime.get_prime_factors(n)
 
         # prime_all_powers
@@ -64,14 +64,27 @@ class Divisor:
             res.append( reduce(lambda x,y: int(x)*int(y), pair) )
         return res
 
-    def __get_pds2(self, n):
+    def _get_pds2(self, n):
         pds = []
         for i in range(1, int(n / 2) + 1):
             if n % i == 0:
                 pds.append( i )
         return pds
 
+def __test_pds_performance(n):
+    P = Performance()
+    D = Divisor()
+    return P.compare_functions(D, '_get_pds1', [n,],
+                               D, '_get_pds2', [n,])
+
+def test_pds_performance():
+    for n in [100, 300, 1000, 2000, 2500, 3000, 10000]:
+        print """for n %s _get_pds1 (the one using Permutation)
+                 is faster than _get_pds2 (the naive one)? %s""" %(n, __test_pds_performance(n))
+
+
 if __name__ == "__main__":
+    #test_pds_performance()
     import doctest
     if doctest.testmod().failed:
         import sys
