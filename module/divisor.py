@@ -34,8 +34,7 @@ class Divisor:
         powers = [v + 1 for v in factors.values()] # [p+1, q+1, r+1, ...]
         return reduce(lambda x, y: x * y, powers)
 
-    # TODO: optimize performance by changing n_large
-    def get_proper_divisors(self, n, n_large = 10000):
+    def get_proper_divisors(self, n, n_large = 2000):
         """
         >>> D = Divisor()
         >>> D.get_proper_divisors(28)
@@ -72,30 +71,20 @@ class Divisor:
                 pds.append( i )
         return pds
 
-    def test_pds_performance(self, n):
-        """
-        >>> D = Divisor()
-        >>> D.test_pds_performance(100)
-        False
-        >>> D.test_pds_performance(300)
-        False
-        >>> D.test_pds_performance(1000)
-        False
-        >>> D.test_pds_performance(2000)
-        False
-        >>> D.test_pds_performance(2500)
-        True
-        >>> D.test_pds_performance(3000)
-        True
-        >>> D.test_pds_performance(10000)
-        True
-        """
-        P = Performance()
-        return P.compare_functions(self, '_get_pds1', [n,],
-                                   self, '_get_pds2', [n,])
+def __test_pds_performance(n):
+    P = Performance()
+    D = Divisor()
+    return P.compare_functions(D, '_get_pds1', [n,],
+                               D, '_get_pds2', [n,])
+
+def test_pds_performance():
+    for n in [100, 300, 1000, 2000, 2500, 3000, 10000]:
+        print """for n %s _get_pds1 (the one using Permutation)
+                 is faster than _get_pds2 (the naive one)? %s""" %(n, __test_pds_performance(n))
 
 
 if __name__ == "__main__":
+    #test_pds_performance()
     import doctest
     if doctest.testmod().failed:
         import sys

@@ -12,6 +12,11 @@ class Performance:
     """
     def compare_functions(self, obj1, func1, params1,
                           obj2, func2, params2, iteration=10000):
+        """
+        >>> P = Performance()
+        >>> P.compare_functions(sys.modules['time'], 'sleep', [1,], sys.modules['time'], 'sleep', [5,], iteration = 1)
+        True
+        """
         start_time1 = time.time()
         for i in xrange(iteration):
             method1 = getattr(obj1, func1)
